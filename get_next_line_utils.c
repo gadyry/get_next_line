@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 09:28:27 by ael-gady          #+#    #+#             */
-/*   Updated: 2024/12/09 21:09:37 by ael-gady         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:10:15 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ int	check_retline(char * line)
 	return (0);
 }
 
-static char	*ft_strdup(char *s)
+char	*ft_strdup(char *s)
 {
 	int		i;
 	char	*str;
 	int		len;
 
 	i = 0;
+	if (!s)
+		return NULL;
 	len = ft_strlen(s);
 	str = (char *)malloc(len + 1);
 	if (!str)
@@ -92,17 +94,16 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*str;
 	size_t	len;
 	char	*check_res;
-	
+
 	if (!s1 && !s2)
 		return (NULL);
 	check_res = check_if_one_null(s1, s2);
 	if (check_res)
 		return(check_res);
-
 	len = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(len + 1);
 	if (!str)
-		return (NULL);
+		return (free(s1), s1 = NULL, NULL);
 	copy_strings(str,s1,s2);
 	free(s1);
 	return (str);
