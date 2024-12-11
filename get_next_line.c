@@ -6,12 +6,11 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:09:51 by ael-gady          #+#    #+#             */
-/*   Updated: 2024/12/10 12:58:04 by ael-gady         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:51:50 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <libc.h>
 
 char	*pass_current_line(char	**res_line)
 {
@@ -40,31 +39,31 @@ char	*pass_current_line(char	**res_line)
 	return (rt_line);
 }
 
-char	*pass_next_line(char *old_line)
+char	*pass_next_line(char **old_line)
 {
 	size_t	i;
 	char	*new_line;
 	size_t	j;
 
-	if (!old_line)
+	if (!*old_line)
 		return (NULL);
 	i = 0;
-	while (old_line[i] && old_line[i] != '\n')
+	while ((*old_line)[i] && (*old_line)[i] != '\n')
 		i++;
-	if (!old_line[i] || !old_line[i + 1])//If no more content after newline
-		return (free(old_line), NULL);
-	i += (old_line[i] == '\n');
-	new_line = malloc(ft_strlen(old_line) - i + 1);
+	if (!(*old_line)[i] || !(*old_line)[i + 1])
+		return (free(*old_line), *old_line = NULL, NULL);
+	i += ((*old_line)[i] == '\n');
+	new_line = malloc(ft_strlen(*old_line) - i + 1);
 	if (!new_line)
-		return (free(old_line), NULL);
+		return (free(*old_line), NULL);
 	j = 0;
-	while (old_line[i + j])
+	while ((*old_line)[i + j])
 	{
-		new_line[j] = old_line[i + j];
+		new_line[j] = (*old_line)[i + j];
 		j++;
 	}
 	new_line[j] = '\0';
-	free(old_line);
+	free(*old_line);
 	return (new_line);
 }
 
@@ -92,6 +91,6 @@ char	*get_next_line(int fd)
 	if (!res_line || *res_line == '\0')
 		return (free(res_line), res_line = NULL, NULL);
 	get_line = pass_current_line(&res_line);
-	res_line = pass_next_line(res_line);
+	res_line = pass_next_line(&res_line);
 	return (get_line);
 }

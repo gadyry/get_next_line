@@ -6,12 +6,11 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 09:28:27 by ael-gady          #+#    #+#             */
-/*   Updated: 2024/12/10 12:10:15 by ael-gady         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:42:54 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <libc.h>
 
 size_t	ft_strlen(const char *str)
 {
@@ -23,7 +22,7 @@ size_t	ft_strlen(const char *str)
 	return (cpt);
 }
 
-int	check_retline(char * line)
+int	check_retline(char *line)
 {
 	size_t	i;
 
@@ -39,7 +38,7 @@ int	check_retline(char * line)
 	return (0);
 }
 
-char	*ft_strdup(char *s)
+static char	*ft_strdup(char *s)
 {
 	int		i;
 	char	*str;
@@ -47,7 +46,7 @@ char	*ft_strdup(char *s)
 
 	i = 0;
 	if (!s)
-		return NULL;
+		return (NULL);
 	len = ft_strlen(s);
 	str = (char *)malloc(len + 1);
 	if (!str)
@@ -59,14 +58,6 @@ char	*ft_strdup(char *s)
 	}
 	str[i] = '\0';
 	return (str);
-}
-static char	*check_if_one_null(char *s1, char *s2)
-{
-	if (!s1 && s2)
-		return (ft_strdup(s2));
-	if (!s2 && s1)
-		return (s1);
-	return (NULL);
 }
 
 static void	copy_strings(char *dest, char *s1, char *s2)
@@ -93,18 +84,17 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	size_t	len;
-	char	*check_res;
 
 	if (!s1 && !s2)
 		return (NULL);
-	check_res = check_if_one_null(s1, s2);
-	if (check_res)
-		return(check_res);
+	if (!s1 && s2)
+		return (ft_strdup(s2));
+	if (!s2 && s1)
+		return (s1);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(len + 1);
 	if (!str)
 		return (free(s1), s1 = NULL, NULL);
-	copy_strings(str,s1,s2);
-	free(s1);
-	return (str);
+	copy_strings(str, s1, s2);
+	return (free(s1), str);
 }
