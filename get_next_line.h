@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:20:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2024/12/10 16:48:35 by ael-gady         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:12:04 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 69
 # endif
 
 # include <unistd.h>

@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:03:54 by ael-gady          #+#    #+#             */
-/*   Updated: 2024/12/11 10:47:45 by ael-gady         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:39:02 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ char	*get_next_line(int fd)
 	static char	*res_line[OPEN_MAX];
 	ssize_t		read_bytes;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (free(res_line[fd]), res_line[fd] = NULL, NULL);
+	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE <= 0)
+		return (NULL);
 	get_line = malloc((size_t)BUFFER_SIZE + 1);
 	if (!get_line)
 		return (free(res_line[fd]), res_line[fd] = NULL, NULL);

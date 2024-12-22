@@ -6,11 +6,11 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:00:19 by ael-gady          #+#    #+#             */
-/*   Updated: 2024/12/10 17:37:48 by ael-gady         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:59:24 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
